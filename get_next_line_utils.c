@@ -6,15 +6,15 @@
 /*   By: abiru <abiru@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 23:15:00 by abiru             #+#    #+#             */
-/*   Updated: 2022/11/30 23:15:36 by abiru            ###   ########.fr       */
+/*   Updated: 2022/12/01 12:06:33 by abiru            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strlen(char const *s)
+size_t	ft_strlen(char const *s)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (s[i] != '\0')
@@ -28,7 +28,7 @@ char	*ft_strdup(const char *s1)
 	int		i;
 
 	i = 0;
-	dest = (char *)malloc(sizeof(*s1) * (ft_strlen(s1) + 1));
+	dest = (char *)malloc(sizeof(*s1) * ((int)ft_strlen(s1) + 1));
 	if (!dest)
 		return (NULL);
 	while (s1[i] != '\0')
@@ -72,8 +72,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	if (!s1)
 		return (NULL);
-	s_len = ft_strlen(s1);
-	ss_len = ft_strlen(s2);
+	s_len = (int)ft_strlen(s1);
+	ss_len = (int)ft_strlen(s2);
 	ptr = (char *)malloc(s_len + ss_len + 1);
 	if (!ptr)
 		return (NULL);

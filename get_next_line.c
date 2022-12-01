@@ -6,7 +6,7 @@
 /*   By: abiru <abiru@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 19:04:20 by abiru             #+#    #+#             */
-/*   Updated: 2022/12/01 09:40:45 by abiru            ###   ########.fr       */
+/*   Updated: 2022/12/01 12:10:58 by abiru            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ char	*get_next(char *tmp)
 		return (NULL);
 	}
 	nl = ft_strchr(tmp, '\n');
-	next = (char *)malloc(sizeof(char) * (ft_strlen(tmp) - nl_pos(tmp) + 1));
+	next = (char *)malloc(sizeof(char)
+			* ((int)ft_strlen(tmp) - nl_pos(tmp) + 1));
 	if (!next)
 	{
 		free(tmp);
@@ -97,11 +98,11 @@ char	*read_line(int fd, char *fd_table)
 
 char	*get_next_line(int fd)
 {
-	static char	*fd_table[256];
+	static char	*fd_table[MAX_FD + 1];
 	char		*line;
 
 	line = NULL;
-	if (fd < 0 || fd > 255 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd > MAX_FD || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (!fd_table[fd])
 		fd_table[fd] = ft_strdup("");
@@ -112,18 +113,3 @@ char	*get_next_line(int fd)
 	fd_table[fd] = get_next(fd_table[fd]);
 	return (line);
 }
-
-// #include <fcntl.h>
-// #include <stdio.h>
-// int main()
-// {
-// 	int fd = open("test.txt", O_RDONLY);
-// 	char *str = get_next_line(fd);
-// 	printf("%s", str);
-// 	// free(str);
-// 	// while (str)
-// 	// {
-// 	// 	printf("%s", str);
-// 	// 	str = get_next_line(fd);
-// 	// }
-// }

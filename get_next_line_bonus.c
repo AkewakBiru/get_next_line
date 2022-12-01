@@ -6,7 +6,7 @@
 /*   By: abiru <abiru@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 23:14:43 by abiru             #+#    #+#             */
-/*   Updated: 2022/11/30 23:15:26 by abiru            ###   ########.fr       */
+/*   Updated: 2022/12/01 12:15:11 by abiru            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ char	*get_next(char *tmp)
 		return (NULL);
 	}
 	nl = ft_strchr(tmp, '\n');
-	next = (char *)malloc(sizeof(char) * (ft_strlen(tmp) - nl_pos(tmp) + 1));
+	next = (char *)malloc(sizeof(char)
+			* ((int)ft_strlen(tmp) - nl_pos(tmp) + 1));
 	if (!next)
 	{
 		free(tmp);
@@ -97,11 +98,11 @@ char	*read_line(int fd, char *fd_table)
 
 char	*get_next_line(int fd)
 {
-	static char	*fd_table[256];
+	static char	*fd_table[MAX_FD + 1];
 	char		*line;
 
 	line = NULL;
-	if (fd < 0 || fd > 255 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd > MAX_FD || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (!fd_table[fd])
 		fd_table[fd] = ft_strdup("");
