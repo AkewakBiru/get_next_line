@@ -21,13 +21,27 @@ next line (saved for next func call) => "file 1\0"
 int main()
 {
 	int fd = open("test.txt", O_RDONLY);
+	int fd2 = open("test2.txt", O_RDONLY);
 	char *str = get_next_line(fd);
+	char *str2 = get_next_line(123);
 	if (!str)
 		printf("%s", str);
 	while (str)
 	{
 		printf("%s", str);
+		free(str);
 		str = get_next_line(fd);
 	}
+	free(str);
+
+	if (!str2)
+		printf("%s", str2);
+	while (str2)
+	{
+		printf("%s", str2);
+		free(str2);
+		str2 = get_next_line(123);
+	}
+	free(str2);
 	return (0);
 }
